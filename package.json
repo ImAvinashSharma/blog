@@ -1,16 +1,14 @@
 {
     "name": "Avinash Sharma Blog website",
     "description": "Starter for creating a Next.js powered blog with content authored in MDX.",
-    "version": "0.2.4",
+    "version": "2.0.4",
     "scripts": {
         "dev": "next",
         "build": "next build",
         "start": "next start",
         "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
         "format-watch": "npm run format && onchange \"**/*.{js,jsx,json,md}\" -- prettier --write {{changed}}",
-        "deploy": "git push origin main && vercel --prod",
-        "cache-posts": "node .next/server/cache.js",
-        "pre-commit": "npm cache-posts && git add cache/blog.js"
+        "deploy": "git push origin main && vercel --prod"
     },
     "dependencies": {
         "@emotion/react": "^11.7.1",

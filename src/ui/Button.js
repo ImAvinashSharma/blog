@@ -7,7 +7,6 @@ const Button = (props) => (
       px: 3,
       py: 2,
       bg: "black",
-      color: "#fff",
       boxShadow: "none",
       borderRadius: "4px",
       border: "none",

@@ -1,6 +1,6 @@
 import React from "react"
 import Highlight, { defaultProps } from "prism-react-renderer"
-import github from "prism-react-renderer/themes/github"
+import theme from "prism-react-renderer/themes/vsDark"
 
 const CodeBlock = ({ children, className }) => {
   const language = className ? className.replace(/language-/, "") : "javascript"
@@ -9,12 +9,17 @@ const CodeBlock = ({ children, className }) => {
       {...defaultProps}
       code={children}
       language={language}
-      theme={github}
+      theme={theme}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
           className={className}
-          style={{ ...style, padding: "20px", marginBottom: "32px" }}
+          style={{
+            ...style,
+            fontSize: "1.3em",
+            padding: "20px",
+            marginBottom: "32px",
+          }}
         >
           {tokens.map((line, i) => (
             <div key={i} {...getLineProps({ line, key: i })}>

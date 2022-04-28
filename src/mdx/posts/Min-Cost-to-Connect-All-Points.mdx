@@ -22,7 +22,7 @@ Output: 20
 We can connect the points as shown above to get the minimum cost of 20.
 Notice that there is a unique path between every pair of points.
 
-```python3
+```python
 class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
         d, res = {(x, y): float('inf') if i else 0 for i, (x, y) in enumerate(points)}, 0
