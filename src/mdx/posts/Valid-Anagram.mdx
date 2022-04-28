@@ -1,0 +1,80 @@
+---
+title: 'Valid Anagram'
+excerpt: 'Given two strings s and t, return true if t is an anagram of s, and false otherwise.An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.'
+date: '2022-04-28T05:35:07.322Z'
+---
+
+# 242. Valid Anagram
+
+Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+#### Example 1:
+
+```text
+Input: s = "anagram", t = "nagaram"
+Output: true
+Example 2:
+```
+#### Example 2:
+```text
+Input: s = "rat", t = "car"
+Output: false
+```
+## Approch 1
+Sort the strings and compare if equal return True else return False
+```python
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        return sorted(s) == sorted(t)
+```
+## Approch 2
+
+Use a hashmap to store the count of each character in the string.
+
+After that use another for loop on the string 't' subtract frequency and check if frequency >0 return True else return False
+
+```python
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+      def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+
+        hashi = {}
+
+        for char in s:
+            if char not in hashi:
+                hashi[char] = 1
+            else:
+                hashi[char] += 1
+        for char in t:
+            if char in hashi:
+                hashi[char] -= 1
+            else:
+                return False
+
+        for val in hashi.values():
+            if val != 0:
+                return False
+
+        return True
+```
+
+## Approch 3
+
+Use a 'dict' to store the count of each character in the given two string.
+
+And the compare the two dict if they are equal return True else False.
+
+```python
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+      dic1, dic2 = {}, {}
+      for item in s:
+          dic1[item] = dic1.get(item, 0) + 1
+      for item in t:
+          dic2[item] = dic2.get(item, 0) + 1
+      return dic1 == dic2
+```

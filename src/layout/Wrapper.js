@@ -5,6 +5,7 @@ import config from "../../blog.config"
 import ReactGA from "react-ga"
 
 const Wrapper = (props) => {
+  //Set Google Analytics
   if (typeof config.analytics === "string" && config.analytics !== "") {
     ReactGA.initialize(config.analytics)
     ReactGA.set({ anonymizeIp: true })

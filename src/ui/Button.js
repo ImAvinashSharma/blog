@@ -4,8 +4,6 @@ const Button = (props) => (
   <Btn
     sx={{
       fontSize: 3,
-      px: 3,
-      py: 2,
       bg: "black",
       boxShadow: "none",
       borderRadius: "4px",

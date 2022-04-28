@@ -4,16 +4,13 @@ const Footer = (props) => (
   <Box
     sx={{
       p: 4,
-      color: "#666",
+      color: "#5c5c5c",
       textAlign: "center",
       fontSize: 1,
     }}
   >
     <Text sx={{ mx: 3, display: "inline-block" }}>
-      Created with ❤️ by <a href="http://avinash-sharma.com/">Avinash Sharma</a>
-    </Text>
-    <Text sx={{ mx: 3, display: "inline-block" }}>
-      Follow <a href="https://twitter.com/imAvinashDev">@imAvinashDev</a>
+      Created with ❤️ by <a href="https://avinash-sharma.com">Avinash Sharma</a>
     </Text>
   </Box>
 )

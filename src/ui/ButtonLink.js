@@ -2,10 +2,9 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import React from "react"
-import PropTypes from "prop-types"
 import Link from "next/link"
 
-const A = React.forwardRef(({ onClick, href, styles, children }, ref) => {
+const A = React.forwardRef(({ href, styles, children }, ref) => {
   return (
     <a href={href} sx={styles} ref={ref}>
       {children}

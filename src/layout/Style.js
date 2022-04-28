@@ -209,6 +209,7 @@ const Style = (props) => (
     }
     a {
       color: ${theme.colors.primary};
+      text-decoration: none;
     }
   `}</style>
 )
