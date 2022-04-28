@@ -11,19 +11,6 @@ module.exports = withMDX({
       topLevelAwait: true,
     }
     // Fixes npm packages (mdx) that depend on `fs` module
-    if (isServer) {
-      return {
-        ...config,
-        // This is what allows us to add a node script via NextJS's server
-        entry() {
-          return config.entry().then((entry) => {
-            return Object.assign({}, entry, {
-              cache: "./cache/cache.js",
-            })
-          })
-        },
-      }
-    }
     if (!isServer) {
       config.resolve.fallback.fs = false
     }

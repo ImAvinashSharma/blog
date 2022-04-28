@@ -9,7 +9,6 @@ const Header = (props) => (
       <Heading sx={{ fontSize: 6, pb: 2, px: 3 }} as="h1">
         {config.title}
       </Heading>
-      <Heading sx={{ pb: 3, px: [3, 4] }}>{config.subtitle}</Heading>
       <Nav />
     </Box>
   </MDXProvider>
