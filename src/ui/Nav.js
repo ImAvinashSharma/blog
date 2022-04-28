@@ -1,7 +1,6 @@
 import { useRouter } from "next/router"
 import { Box } from "theme-ui"
 import NavLink from "./NavLink"
-
 const Nav = (props) => {
   const router = useRouter()
   return (
