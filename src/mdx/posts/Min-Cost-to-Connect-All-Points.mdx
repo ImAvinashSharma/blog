@@ -12,8 +12,9 @@ The cost of connecting two points [xi, yi] and [xj, yj] is the manhattan distanc
 
 Return the minimum cost to make all points connected. All points are connected if there is exactly one simple path between any two points.
 
+```reason
 Input: points = [[0,0],[2,2],[3,10],[5,2],[7,0]]
-
+```
 Output: 20
 
 ![graph](https://assets.leetcode.com/uploads/2020/08/26/c.png)
@@ -21,6 +22,12 @@ Output: 20
 ## Explanation:
 We can connect the points as shown above to get the minimum cost of 20.
 Notice that there is a unique path between every pair of points.
+
+Constraints:
+
+1 <= points.length <= 1000
+-106 <= xi, yi <= 106
+All pairs (xi, yi) are distinct.
 
 ```python
 class Solution:
