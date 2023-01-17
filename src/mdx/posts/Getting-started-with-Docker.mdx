@@ -1,0 +1,147 @@
+---
+title: 'Getting started with Docker'
+excerpt: 'This guide contains step-by-step instructions on how to get started with Docker. Things you will learn about Docker are network and volume'
+coverImage: '/img/blog/docker.png'
+coverImageAlt: 'Docker Image'
+coverImageWidth: 960
+coverImageHeight: 480
+date: '2023-01-17T05:35:07.322Z'
+---
+
+# Getting started with Docker
+
+### DockerFile:
+
+A Dockerfile is a script that contains instructions for building a Docker image. To create a Dockerfile, you will need to have a basic understanding of the command line and the Docker command syntax. Here is an example of a simple Dockerfile:
+
+```docker
+# Use an official Python runtime as the base image
+FROM python:3.8-slim-buster
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements file into the container
+COPY requirements.txt .
+
+# Install the required packages
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code into the container
+COPY . .
+
+# Make port 80 available to the world outside the container
+EXPOSE 80
+
+# Define the command to run when the container starts
+CMD ["python", "app.py"]
+```
+
+1. **`FROM`** instruction sets the Base Image for subsequent instructions.
+2. **`WORKDIR`** instruction sets the working directory.
+3. **`COPY`** instruction copies new files or directories in the container.
+4. **`RUN`** instruction will execute any commands in a new layer on top of the current image and commit the results.
+5. **`EXPOSE`** instruction informs Docker that the container will listen on the specified network ports at runtime.
+6. **`CMD`** instruction provides default command, which will be executed only when you run the container
+
+You can build the image using the command **`docker build -t <image_name> .`**
+
+It is important to note that a Dockerfile should be named **`Dockerfile`** and should be located at the root of the directory containing the rest of the files for the application.
+
+### Here are some best practices for creating a Dockerfile:
+
+1. Use a minimal base image: Use a minimal base image that contains only the necessary dependencies for your application. This will help keep the image size small and reduce the attack surface.
+2. Use the **`.dockerignore`** file: Use a **`.dockerignore`** file to exclude files and directories that do not need to be included in the image. This will help keep the image size small and reduce build time.
+3. Use multi-stage builds: Multi-stage builds allow you to use multiple **`FROM`** instructions in a single Dockerfile. This can be used to build your application in one stage and then copy the necessary files to a smaller runtime image in another stage.
+4. Use environment variables: Use environment variables to configure your application at runtime instead of hardcoding values in the Dockerfile.
+5. Run a single process per container: Each container should be designed to run a single process, and that process should handle the majority of the container's responsibilities.
+6. Keep the Dockerfile simple and easy to understand: Keep the Dockerfile simple and easy to understand so that it is easy to maintain and troubleshoot.
+7. Keep the container updated: Keep the container updated with the latest security patches and software versions.
+8. Keep the container small: Keep the container small by limiting the number of installed packages and removing unnecessary files.
+9. Limit the number of layers: Limit the number of layers by combining commands together when possible.
+10. Avoid using **`latest`** tag: Avoid using **`latest`** tag when specifying the version of a base image, instead use explicit version number to prevent unexpected changes.
+
+### Docker Compose is a tool for defining and running multi-container Docker applications. To create a **`docker-compose.yml`** file, follow these steps:
+
+1. Create a new directory for your project and navigate into it.
+2. Create a new file called **`docker-compose.yml`** in the project directory.
+3. In the **`docker-compose.yml`** file, define your application's services, networks, and volumes.
+4. Use the **`docker-compose`** command-line tool to build, run, and manage your application.
+
+Here is an example of a **`docker-compose.yml`** file that defines a simple web service and a database service:
+
+```docker
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: example
+      POSTGRES_PASSWORD: example
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:
+```
+
+To start the services defined in this **`docker-compose.yml`** file, run the following command:
+
+```bash
+docker-compose up
+```
+
+You can also use **`docker-compose down`** to stop and remove the containers, networks, and volumes created by **`docker-compose up`**.
+
+You can find more information and examples in the official Docker Compose documentation: **[https://docs.docker.com/compose/](https://docs.docker.com/compose/)**
+
+### Docker network and volume
+
+In Docker, a network is a virtual interface that allows containers to communicate with each other and with the host system. By default, each container is connected to a network called **`bridge`**, but you can also create custom networks to control how containers interact with each other.
+
+A volume is a way to store data outside of a container's filesystem. This allows data to persist even if the container is deleted, and also allows multiple containers to share the same data. Volumes can be created and managed using the **`docker volume`** command.
+
+In **`docker-compose.yml`** file, you can define the networks and volumes for your application's services. Here is an example of how to define a custom network and a volume in a **`docker-compose.yml`** file:
+
+```
+version: '3'
+services:
+  web:
+    build: .
+    networks:
+      - mynetwork
+    volumes:
+      - myvolume:/app
+networks:
+  mynetwork:
+volumes:
+  myvolume
+```
+
+In this example, the **`web`** service is connected to a network called **`mynetwork`** and is using a volume called **`myvolume`** to store data in the **`/app`** directory.
+
+You can also use the **`docker network`** and **`docker volume`** commands to manage networks and volumes outside of **`docker-compose`**.
+
+You can find more information and examples in the official Docker documentation:
+
+- Networks: **[https://docs.docker.com/network/](https://docs.docker.com/network/)**
+- Volumes: **[https://docs.docker.com/storage/volumes/](https://docs.docker.com/storage/volumes/)**
+
+### Docker network types
+
+Docker supports several types of networks, each with its own unique features and use cases. The most commonly used network types are:
+
+1. **`bridge`**: This is the default network type in Docker. It creates a virtual network between the host and the containers, allowing them to communicate with each other and with the host system. Containers on the same bridge network can see and communicate with each other, but they cannot communicate with containers on other networks.
+2. **`host`**: This network type allows a container to use the host's network stack. This means that the container shares the host's IP address and network configuration. This is useful for scenarios where you need to access a service running in a container on the host's network.
+3. **`none`**: This network type disables all network connections for the container. This is useful for scenarios where you need to run a process that does not need network connectivity, or when you want to configure the container's network stack manually.
+4. **`overlay`**: This network type allows you to create a virtual network that spans multiple Docker hosts. This is useful for scenarios where you need to connect containers running on different hosts, such as in a swarm cluster.
+5. **`macvlan`**: This network type allows you to assign a unique MAC address to each container, making it appear as a physical host on the network. This is useful for scenarios where you need to give a container its own IP address, or when you want to integrate a container into an existing network infrastructure.
+
+You can find more information and examples in the official Docker documentation: **[https://docs.docker.com/network/](https://docs.docker.com/network/)**
+
+It's important to note that the network type you choose will depend on the requirements of your application and infrastructure.
